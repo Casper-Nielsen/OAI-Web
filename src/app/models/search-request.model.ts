@@ -1,4 +1,3 @@
-export interface SearchRequest {
-    questionId : string | number;
-    answer : string;
+export class SearchRequest {
+    question : string = "";
 }
