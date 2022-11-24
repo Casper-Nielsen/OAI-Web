@@ -7,6 +7,7 @@ import { APP_INITIALIZER } from '@angular/core';
   import {AppConfig} from 'src/app/config/app-config';
 
 import { AppComponent } from './app.component';
+import { MessageBoxComponent } from './components/message-box/message-box.component';
 
 export function initConfig(config: AppConfig) {
   return () => config.load();
@@ -14,7 +15,8 @@ export function initConfig(config: AppConfig) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MessageBoxComponent
   ],
   imports: [
     BrowserModule,

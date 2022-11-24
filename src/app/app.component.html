@@ -1,8 +1,26 @@
-<h1>{{title}}</h1>
-<p>svar:</p>
-<span>{{answer}}</span>
-<p>spørgsmål</p>
-<form (submit)="search()">
-  <input type="text" id="question" name="question" placeholder="spørgsmål" [(ngModel)]="question"/>
-  <button type="submit">søg</button>  
-</form>
+<div>  
+  <h1 class="title">{{title}}</h1>
+  <p class="underTitle">du spørger vi svare!</p>
+  <div class="messages">
+    <div  *ngFor="let value of MessageList">
+        <app-message-box 
+        [isAnswer]="value.isAnswer"
+        [isHidden]="value.delete"
+        [text]="value.text"></app-message-box>
+    </div>
+  </div>
+  <form class="questionBox" (submit)="search()">
+    <input class="inputField" type="text" id="questionInput" name="questionInput" placeholder="spørgsmål" [(ngModel)]="questionInput"/>
+    <button class="btn-submit" type="submit">søg</button>  
+  </form>
+  <div class="feedback" *ngIf="requestFeedback">
+    <span>Vil du hjælpe med at gøre chatbotten bedre.<br>Hvis ja fandt du så svaret hjælpsomt?</span>
+    <br>
+    <button class="btn good" (click)="clickFeedback(true)">Ja</button>
+    <button class="btn bad" (click)="clickFeedback(false)">Nej</button>
+  </div>
+  <div class="footer">
+    <img class="logo" src="https://www.zbc.dk/media/1363/zbc_logo_payoff_black.jpg"/>
+    <span> Chatbot er lavet muligt ved hjælp af OAI,<br>Lavet på svendeprøven af Casper og Niklas<br><br><a href="https://www.flaticon.com/free-icons/robot" title="robot icons">Robot icons created by Smashicons - Flaticon</a></span>
+  </div>
+</div>

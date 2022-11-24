@@ -1,0 +1,64 @@
+.messages{
+    height: 250px;
+}
+.questionBox{
+    width: 75%;
+    margin-right: 12.5%;
+    margin-left: 12.5%;
+    justify-self: center;
+}
+.inputField{
+    border-radius: 25px 0px 0px 25px;
+    border-width: 1px;
+    border-color: #a5a5a5;
+    width: 75%;
+    padding: 10px;
+}
+.btn-submit{
+    border-radius: 0px 25px 25px 0px;
+    border-width: 1px;
+    border-color: #5bc4bf;
+    background-color: #5bc4bf;
+    width: 20%;
+    padding: 10px;
+}
+.footer{
+    justify-self: end;
+    margin: 10px;
+    width: -webkit-fill-available;
+    height: fit-content;
+    position: absolute;
+    bottom: 0;
+}
+.footer-text{
+    width: 75%;
+}
+.logo{
+    width: 100px;
+    float: right;
+}
+.title{
+    text-align: center;
+    margin-bottom: 0px;
+}
+.underTitle{
+    text-align: center;
+    margin-top: 0px;
+}
+.feedback{
+    text-align: center;
+    margin-top: 25px;
+}
+.btn{
+    padding: 10px;
+    min-width: 100px;
+    margin: 10px;
+    border-radius: 25px;
+    border-width: 0px;
+}
+.good{
+    background-color: #5bc45d;
+}
+.bad{
+    background-color: #c45b5b;
+}

@@ -26,11 +26,7 @@ export class ApiSearchService {
       let searchRequest : SearchRequest = new SearchRequest();
       searchRequest.question = question;
       this.http.post<SearchResponse>(this.baseURL + "Answer", searchRequest).subscribe(data => {
-        this.latestSearchRequest = data as SearchResponse;
-        console.log(this.latestSearchRequest);
-        console.log(data);
-        console.log(this.latestSearchRequest.answer);
-        
+        this.latestSearchRequest = data as SearchResponse;        
         observer.next(data.answer)
     })
       return {

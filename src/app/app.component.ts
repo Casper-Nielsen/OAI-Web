@@ -8,18 +8,58 @@ import { ApiSearchService } from 'src/app/services/api-search.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'OAI-Web';
-  answer : string = "";
+  MessageList : Array<Message> = [];
+  title = 'ZBC Chatter';
+  questionInput : string = "";
   question : string = "";
+  requestFeedback : boolean = false;
 
-  constructor(
-    private http: HttpClient, 
-    private apiSearch : ApiSearchService){  }
+  constructor(private apiSearch : ApiSearchService){  }
 
   search(){
+    this.question = this.questionInput;
+    let message = new Message();
+    message.text = this.question;
+    this.MessageList.push(message);
+    this.requestFeedback = false;
+
     this.apiSearch.search(this.question).subscribe(data => {
-      console.log(data);
-      this.answer = data;
+      setTimeout(() => {
+        let message = new Message();
+        message.text = data;
+        message.isAnswer = true;
+        this.MessageList.push(message);
+        this.requestFeedback = true;
+        for (let index = 0; index < this.MessageList.length-2; index++) {
+          const element = this.MessageList[index].delete = true;
+        }
+        setTimeout(() => {
+          while(this.MessageList.length > 2){
+            this.MessageList.splice(0,1);
+          }
+        }, 300)
+      }, 250)
     });
   }
+
+  clickFeedback(feedback : boolean){
+    console.log("feedback was:" + feedback);
+
+    this.requestFeedback = false;
+
+    for (let index = 0; index < this.MessageList.length; index++) {
+      const element = this.MessageList[index].delete = true;
+    }
+    setTimeout(() => {
+      while(this.MessageList.length){
+        this.MessageList.splice(0,1);
+      }
+    }, 300)
+  }
+}
+
+class Message{
+  text : string = "";
+  isAnswer : boolean = false;
+  delete : boolean = false;
 }

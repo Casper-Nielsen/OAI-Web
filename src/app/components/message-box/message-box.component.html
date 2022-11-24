@@ -1,0 +1,6 @@
+<div class="messageBox" [ngClass]="{isAnswer, 'hidden' : isHidden}">
+    <img *ngIf="isAnswer" class="icon" src="https://cdn-icons-png.flaticon.com/512/5015/5015205.png"/>
+    <div [ngClass]="{'question' : !isAnswer, 'answer' : isAnswer}">
+        <span>{{text}}</span>
+    </div>
+</div>
