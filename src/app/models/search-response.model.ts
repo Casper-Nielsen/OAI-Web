@@ -1,4 +1,4 @@
 export class SearchResponse {
-    questionId : string | number = "";
+    questionId : string = "";
     answer : string = "";
 }
