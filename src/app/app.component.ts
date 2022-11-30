@@ -18,6 +18,7 @@ export class AppComponent {
 
   search(){
     this.question = this.questionInput;
+    this.questionInput = "";
     let message = new Message();
     message.text = this.question;
     this.MessageList.push(message);
@@ -43,7 +44,7 @@ export class AppComponent {
   }
 
   clickFeedback(feedback : boolean){
-    console.log("feedback was:" + feedback);
+    this.apiSearch.SendFeedback(feedback)
 
     this.requestFeedback = false;
 

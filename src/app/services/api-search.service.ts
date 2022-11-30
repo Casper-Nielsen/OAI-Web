@@ -5,6 +5,7 @@ import { SearchRequest } from "src/app/models/search-request.model";
 import { HttpClient } from '@angular/common/http';
 import { AppConfig} from 'src/app/config/app-config';
 import { SearchResponse } from '../models/search-response.model';
+import { FeedbackRequest } from '../models/feedback-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,12 @@ export class ApiSearchService {
         unsubscribe() { }
       }
     });
+  }
+  
+  public SendFeedback(feedback : boolean) {
+      let feedbackRequest : FeedbackRequest = new FeedbackRequest();
+      feedbackRequest.questionId = this.latestSearchRequest?.questionId ?? "";
+      feedbackRequest.feedback = feedback;
+      this.http.post(this.baseURL + "Question/feedback", feedbackRequest).subscribe();
   }
 }
