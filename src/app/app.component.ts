@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiSearchService } from 'src/app/services/api-search.service';
+import { VoiceRecognitionService } from 'src/app/services/voice-recognition.service';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,14 @@ export class AppComponent {
   question : string = "";
   requestFeedback : boolean = false;
 
-  constructor(private apiSearch : ApiSearchService){  }
+  constructor
+  (private apiSearch : ApiSearchService, 
+    public voiceRecognitionService : VoiceRecognitionService ){
+    voiceRecognitionService.init();
+    }
 
   search(){
+    this.voiceRecognitionService.stop();
     this.question = this.questionInput;
     this.questionInput = "";
     let message = new Message();
@@ -56,6 +62,14 @@ export class AppComponent {
         this.MessageList.splice(0,1);
       }
     }, 300)
+  }
+
+  start(){
+    this.voiceRecognitionService.start();
+  }
+
+  stop(){
+    this.voiceRecognitionService.stop();
   }
 }
 
