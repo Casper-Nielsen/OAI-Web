@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiSearchService } from 'src/app/services/api-search.service';
+import { VoiceRecognitionService } from 'src/app/services/voice-recognition.service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,16 @@ export class AppComponent {
   questionInput : string = "";
   question : string = "";
   requestFeedback : boolean = false;
+  voiceRecord : boolean = false;
 
-  constructor(private apiSearch : ApiSearchService){  }
+  constructor
+  (private apiSearch : ApiSearchService, 
+    public voiceRecognitionService : VoiceRecognitionService ){
+    voiceRecognitionService.init().subscribe(data => this.questionInput = data);
+    }
 
   search(){
+    this.voiceRecognitionService.stop();
     this.question = this.questionInput;
     this.questionInput = "";
     let message = new Message();
@@ -56,6 +63,19 @@ export class AppComponent {
         this.MessageList.splice(0,1);
       }
     }, 300)
+  }
+
+  clickVoiceRec(){
+    console.log("switching voice record status")
+    if (!this.voiceRecord){
+      this.voiceRecognitionService.start().subscribe(status => this.voiceRecord = status);
+    }
+    else{
+      this.voiceRecognitionService.stop();
+    }
+    this.voiceRecord = false == this.voiceRecord;
+    console.log(this.voiceRecord);
+    
   }
 }
 

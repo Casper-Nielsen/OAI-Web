@@ -11,6 +11,7 @@
   </div>
   <form class="questionBox" (submit)="search()">
     <input class="inputField" type="text" id="questionInput" name="questionInput" placeholder="spørgsmål" [(ngModel)]="questionInput"/>
+    <button class="btn-voice" type="button" (click)="clickVoiceRec()"><img class="btn-icon" src="https://freesvg.org/img/icon_mic2.png"></button>  
     <button class="btn-submit" type="submit">søg</button>  
   </form>
   <div class="feedback" *ngIf="requestFeedback">
