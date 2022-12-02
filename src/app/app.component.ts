@@ -14,11 +14,12 @@ export class AppComponent {
   questionInput : string = "";
   question : string = "";
   requestFeedback : boolean = false;
+  voiceRecord : boolean = false;
 
   constructor
   (private apiSearch : ApiSearchService, 
     public voiceRecognitionService : VoiceRecognitionService ){
-    voiceRecognitionService.init();
+    voiceRecognitionService.init().subscribe(data => this.questionInput = data);
     }
 
   search(){
@@ -64,12 +65,17 @@ export class AppComponent {
     }, 300)
   }
 
-  start(){
-    this.voiceRecognitionService.start();
-  }
-
-  stop(){
-    this.voiceRecognitionService.stop();
+  clickVoiceRec(){
+    console.log("switching voice record status")
+    if (!this.voiceRecord){
+      this.voiceRecognitionService.start().subscribe(status => this.voiceRecord = status);
+    }
+    else{
+      this.voiceRecognitionService.stop();
+    }
+    this.voiceRecord = false == this.voiceRecord;
+    console.log(this.voiceRecord);
+    
   }
 }
 
