@@ -26,7 +26,7 @@ export class ApiSearchService {
 
       let searchRequest : SearchRequest = new SearchRequest();
       searchRequest.question = question;
-      this.http.post<SearchResponse>(this.baseURL + "Answer", searchRequest).subscribe(data => {
+      this.http.post<SearchResponse>(this.baseURL + "Question", searchRequest).subscribe(data => {
         this.latestSearchRequest = data as SearchResponse;        
         observer.next(data.answer)
     })
@@ -40,6 +40,6 @@ export class ApiSearchService {
       let feedbackRequest : FeedbackRequest = new FeedbackRequest();
       feedbackRequest.questionId = this.latestSearchRequest?.questionId ?? "";
       feedbackRequest.feedback = feedback;
-      this.http.post(this.baseURL + "Question/feedback", feedbackRequest).subscribe();
+      this.http.put(this.baseURL + "Question/feedback", feedbackRequest).subscribe();
   }
 }
